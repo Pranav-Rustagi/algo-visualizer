@@ -5,7 +5,7 @@ const toggleBtns = (btns) => {
 }
 
 const generateElements = (count, boardBox) => {
-    const arr = [...new Array(100).keys()];
+    const arr = [...new Array(100).keys()].slice(5);
     const heightUnit = boardBox.clientHeight / 100;
     const computedStyle = getComputedStyle(boardBox);
     const totalWidth = boardBox.clientWidth - parseFloat(computedStyle.paddingLeft) - parseFloat(computedStyle.paddingRight);
@@ -40,12 +40,12 @@ const getNewBars = (boardBox) => {
     return bars;
 }
 
-const bubbleSort = async (boardBox, delay) => {
+const bubbleSort = async (boardBox, delayEl) => {
     const bars = getNewBars(boardBox);
     for(let i = 0; i < bars.length; i++) {
         for(let j = 0; j < bars.length - i - 1; j++) {
             bars[j].classList.add("active");
-            await sleep(delay);
+            await sleep(delayEl.value);
             if (+bars[j].dataset.value > +bars[j + 1].dataset.value) {
                 [bars[j + 1], bars[j]] = [bars[j], bars[j + 1]];
                 renderChange(boardBox, bars);
@@ -57,13 +57,13 @@ const bubbleSort = async (boardBox, delay) => {
 }
 
 
-const selectionSort = async (boardBox, delay) => {
+const selectionSort = async (boardBox, delayEl) => {
     const bars = getNewBars(boardBox);
     for(let i = 0 ; i < bars.length ; i++) {
         let minInd = i;
         for(let j = i ; j < bars.length ; j++) {
             bars[j].classList.add("active");
-            await sleep(delay);
+            await sleep(delayEl.value);
             if(+bars[j].dataset.value < +bars[minInd].dataset.value) {
                 minInd = j;
             }
@@ -75,14 +75,14 @@ const selectionSort = async (boardBox, delay) => {
     }
 }
 
-const insertionSort = async (boardBox, delay) => {
+const insertionSort = async (boardBox, delayEl) => {
     const bars = getNewBars(boardBox);
 
     for(let i = 0 ; i < bars.length ; i++) {
         bars[i].classList.add("active");
         let j = i - 1;
         while(j >= 0) {
-            await sleep(delay);
+            await sleep(delayEl.value);
             if(+bars[j].dataset.value > +bars[j + 1].dataset.value) {
                 [bars[j], bars[j + 1]] = [bars[j + 1], bars[j]];
                 renderChange(boardBox, bars);
@@ -97,7 +97,7 @@ const insertionSort = async (boardBox, delay) => {
     }
 }
 
-const mergeSort = async (boardBox, delay) => {
+const mergeSort = async (boardBox, delayEl) => {
     const bars = getNewBars(boardBox);
 
     const merge = (left, right) => {
@@ -115,7 +115,7 @@ const mergeSort = async (boardBox, delay) => {
             const mid = Math.floor((left + right) / 2);
             await mergeSortHelper(left, mid);
             await mergeSortHelper(mid + 1, right);
-            await sleep(delay);
+            await sleep(delayEl.value);
             merge(left, right);
         }
     }
@@ -123,7 +123,7 @@ const mergeSort = async (boardBox, delay) => {
     await mergeSortHelper(0, bars.length - 1);
 }
 
-const radixSort = async (boardBox, delay) => {
+const radixSort = async (boardBox, delayEl) => {
     const bars = getNewBars(boardBox);
     const max = Math.max(...bars.map(el => +el.dataset.value));
     const maxDigits = max.toString().length;
@@ -138,7 +138,7 @@ const radixSort = async (boardBox, delay) => {
             bars[j].classList.add("active");
             let k = j - 1;
             while(k >= 0) {
-                await sleep(delay);
+                await sleep(delayEl.value);
                 if(getDigit(+bars[k].dataset.value, i) > getDigit(+bars[k + 1].dataset.value, i)) {
                     [bars[k], bars[k + 1]] = [bars[k + 1], bars[k]];
                     renderChange(boardBox, bars);
@@ -171,7 +171,7 @@ window.addEventListener("load", () => {
     bubbleSortBtn.addEventListener("click", async (e) => {
         if(e.target.hasAttribute("disabled")) return;
         toggleBtns(btns);
-        await bubbleSort(boardBox, delayEl.value);
+        await bubbleSort(boardBox, delayEl);
         toggleBtns(btns);
     });
     
@@ -179,7 +179,7 @@ window.addEventListener("load", () => {
     selectionSortBtn.addEventListener("click", async (e) => {
         if(e.target.hasAttribute("disabled")) return;
         toggleBtns(btns);
-        await selectionSort(boardBox, delayEl.value);
+        await selectionSort(boardBox, delayEl);
         toggleBtns(btns);
     });
     
@@ -187,7 +187,7 @@ window.addEventListener("load", () => {
     insertionSortBtn.addEventListener("click", async (e) => {
         if(e.target.hasAttribute("disabled")) return;
         toggleBtns(btns);
-        await insertionSort(boardBox, delayEl.value);
+        await insertionSort(boardBox, delayEl);
         toggleBtns(btns);
     });
     
@@ -195,7 +195,7 @@ window.addEventListener("load", () => {
     mergeSortBtn.addEventListener("click", async (e) => {
         if(e.target.hasAttribute("disabled")) return;
         toggleBtns(btns);
-        await mergeSort(boardBox, delayEl.value);
+        await mergeSort(boardBox, delayEl);
         toggleBtns(btns);
     });
 
@@ -203,7 +203,7 @@ window.addEventListener("load", () => {
     radixSortBtn.addEventListener("click", async(e) => {
         if(e.target.hasAttribute("disabled")) return;
         toggleBtns(btns);
-        await radixSort(boardBox, delayEl.value);
+        await radixSort(boardBox, delayEl);
         toggleBtns(btns);
     })
 });

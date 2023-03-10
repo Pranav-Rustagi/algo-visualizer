@@ -23,11 +23,12 @@ body {
     display: flex;
     flex-direction: row-reverse;
     height: calc(100vh - 10rem);
-    padding: 1.5rem;
+    padding: 1.5rem 1.5rem 0;
+    width: 100%;
 }
 
 .board {
-    width: 70vw;
+    width: 70%;
     height: 100%;
     background-color: #ffd2b9;
     margin: 0 0 0 0.75rem;
@@ -95,7 +96,7 @@ body {
 } 
 
 .controls {
-    width: 30vw;
+    width: 30%;
     height: 100%;
     background-color: #ffd2b9;
     display: flex;
@@ -114,6 +115,7 @@ body {
     color: #d8a689;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 1rem;
 }
 
 .controls > div {
@@ -127,7 +129,7 @@ body {
 }
 
 .btn-group button {
-    width: 40%;
+    width: 45%;
 }
 
 button {
@@ -146,6 +148,7 @@ button {
     padding: 1rem 3rem;
     background-color: #A75D5D;
     border: 2px solid #533030;
+    margin-bottom: 1rem;
 }
 
 button:disabled {
@@ -154,6 +157,7 @@ button:disabled {
 
 label {
     font-size: 1.25rem;
+    display: block;
     margin-right: 1rem;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -162,10 +166,13 @@ label {
     position: fixed;
     bottom: 0;
     padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.307);
+    background-color: rgba(255, 255, 255, 0.552);
     width: 100%;
-    text-align: center;
+    display: flex;
+    max-height: 3rem;
     font-family: Arial, Helvetica, sans-serif;
+    justify-content: center;
+    align-items: center;
 }
 
 a {
@@ -174,17 +181,85 @@ a {
     font-weight: bold;
 }
 
-@media (max-width: 992px) {
-    button {
-        padding: 0.5rem;
+@media (max-height: 768px) {
+    .header {
+        font-size: 3rem;
     }
 
-    .btn-lg {
-        padding: 0.75rem 1.5rem;
-        font-size: 1.2rem;
+    .board {
+        width: 55%;
+        padding: 6rem 2rem;
+    }
+
+    .controls {
+        width: 45%;
+    }
+
+    .controls-header {
+        font-size: 2rem;
     }
 
     label {
         font-size: 1rem;
+    }
+
+    .btn-group button {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .header {
+        font-size: 2.5rem;
+        max-height: 15vh;
+    }
+
+    .main {
+        flex-direction: column;
+        padding: 2rem 1rem 0;
+        width: 100%;
+        height: 85vh;
+    }
+
+    .board {
+        width: 100%;
+        margin: 0 0 1rem;
+        padding: 1.5rem 0.5rem;
+        height: 35%;
+    }
+
+    .box {
+        border-width: 2px;
+        border-radius: 0;
+        padding: 0 0.25rem;
+    }
+
+    .controls {
+        width: 100%;
+        height: 65%;
+        margin: 0;
+        padding: 1rem;
+    }
+
+    .controls-header {
+        font-size: 2rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    .btn-lg {
+        font-size: 1.1rem;
+        padding: 0.75rem 1.5rem;
+    }
+
+    .btn-group button {
+        padding: 0.25rem;
+    }
+
+    br {
+        height: 2px;
     }
 }
