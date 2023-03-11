@@ -155,9 +155,9 @@ const radixSort = async (boardBox, delayEl) => {
 
 window.addEventListener("load", async () => {
     setTimeout(() => {
-        window.scrollTo(0, 1); 
+        window.scrollTo(0, document.body.scrollHeight); 
     }, 0);
-    
+
     const boardBox = document.querySelector(".box");
     const countEl = document.querySelector("input#count");
     const delayEl = document.querySelector("input#delay");
