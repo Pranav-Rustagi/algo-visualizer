@@ -2,7 +2,7 @@
 const hideURLbar = () => {
     return new Promise(r => setTimeout(() => {
         window.scrollTo(0, 1); 
-    }, 10));
+    }, 0));
 };
 
 
