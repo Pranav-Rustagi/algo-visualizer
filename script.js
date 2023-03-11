@@ -1,11 +1,3 @@
-// hide url bar on mobile devices
-const hideURLbar = () => {
-    return new Promise(r => setTimeout(() => {
-        window.scrollTo(0, 1); 
-    }, 0));
-};
-
-
 const sleep = (delay) => new Promise(r => setTimeout(r, delay));
 
 const toggleBtns = (btns) => {
@@ -162,7 +154,10 @@ const radixSort = async (boardBox, delayEl) => {
 }
 
 window.addEventListener("load", async () => {
-    await hideURLbar();
+    setTimeout(() => {
+        window.scrollTo(0, 1); 
+    }, 0);
+    
     const boardBox = document.querySelector(".box");
     const countEl = document.querySelector("input#count");
     const delayEl = document.querySelector("input#delay");
